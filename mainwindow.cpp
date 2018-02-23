@@ -46,7 +46,7 @@ void MainWindow::onNamReply( QNetworkReply *reply )
 
     if ( !is_object ) // ensure result is object
     {
-        qDebug() << "local error: http response was not jsonable";
+        qDebug() << "local error: http response was not jsonable" << reply->readAll();
         reply->deleteLater(); // cleanup
         return;
     }
@@ -58,9 +58,18 @@ void MainWindow::onNamReply( QNetworkReply *reply )
     double bid = json_obj["bid"].toString().toDouble();
     double ask = json_obj["ask"].toString().toDouble();
 
+    if ( !bid || !ask ) // return on zero
+    {
+        reply->deleteLater();
+        return;
+    }
+
+    double sat_per_usd = (1.f / ask) * 100000000; // invert ask price and multiply by COIN
+
     // print formatted numbers
-    ui->labelBid->setText( "bid: " + QString::number( bid, 'f', 2 ) );
-    ui->labelAsk->setText( "ask: " + QString::number( ask, 'f', 2 ) );
+    ui->labelAsk->setText( QString("ask:%1").arg( QString::number( ask, 'f', 0 ), 7 ) );
+    //ui->labelBid->setText( "bid: " + QString::number( bid, 'f', 2 ) );
+    ui->labelBid->setText( QString("s/usd:%1").arg( QString::number( sat_per_usd, 'f', 0 ), 5 ) );
 
     // cleanup
     reply->deleteLater();

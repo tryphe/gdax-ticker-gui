@@ -6,12 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>163</width>
-    <height>67</height>
+    <width>145</width>
+    <height>65</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>gdax ticker</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #333333</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QLabel" name="labelBid">
@@ -30,10 +33,10 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: #11CC11</string>
+     <string notr="true">color: #44BB44</string>
     </property>
     <property name="text">
-     <string>bid: 00000.00</string>
+     <string>s/usd:00000</string>
     </property>
    </widget>
    <widget class="QLabel" name="labelAsk">
@@ -52,10 +55,10 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: #CC1111</string>
+     <string notr="true">color: #AAAABC</string>
     </property>
     <property name="text">
-     <string>ask: 00000.00</string>
+     <string>ask:0000000</string>
     </property>
    </widget>
   </widget>
